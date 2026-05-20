@@ -53,6 +53,31 @@
                             </select>
                         </div>
 
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Référence (REF)</label>
+                            <input type="text" name="ref" class="form-control" value="{{ old('ref', $contract->ref) }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Date Création</label>
+                            <input type="date" name="date_creation" class="form-control" value="{{ old('date_creation', $contract->date_creation ? $contract->date_creation->format('Y-m-d') : '') }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Interlocuteur</label>
+                            <input type="text" name="interlocuteur" class="form-control" value="{{ old('interlocuteur', $contract->interlocuteur) }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Montant HT (Laissez vide pour calcul auto)</label>
+                            <input type="number" step="0.01" name="montant_ht" class="form-control" value="{{ old('montant_ht', $contract->montant_ht) }}">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Remarque</label>
+                            <textarea name="remarque" class="form-control" rows="2">{{ old('remarque', $contract->remarque) }}</textarea>
+                        </div>
+
                         <div class="col-12 mt-4 pt-3 border-top">
                             <button type="submit" class="btn btn-primary px-4 shadow-sm">
                                 <i class="fa-solid fa-save"></i> Enregistrer les modifications

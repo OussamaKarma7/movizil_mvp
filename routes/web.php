@@ -7,6 +7,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ClientPortalController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminClientController;
@@ -30,6 +31,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+// Public API Route for Sage Desktop Sync (protected by token)
+Route::get('/api/sage-sync', [ExportController::class, 'apiSageSync'])->name('api.sync');
 
 Route::middleware(['auth', 'admin', 'throttle:60,1'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -80,12 +84,16 @@ Route::middleware(['auth', 'admin', 'throttle:60,1'])->group(function () {
         Route::get('/contracts', [ExportController::class, 'exportContracts'])->name('contracts');
         Route::get('/invoices-txt', [ExportController::class, 'exportInvoicesTxt'])->name('invoices.txt');
         Route::get('/journal-excel', [ExportController::class, 'exportJournalExcel'])->name('journal.excel');
+        Route::post('/direct-sync', [ExportController::class, 'directSyncSage'])->name('direct.sync');
     });
 
     Route::prefix('import')->name('import.')->group(function () {
         Route::get('/', [ImportController::class, 'index'])->name('index');
         Route::post('/data', [ImportController::class, 'importData'])->name('data');
     });
+
+    // Chatbot AI
+    Route::post('/chatbot/message', [ChatbotController::class, 'message'])->name('chatbot.message');
 });
 
 Route::middleware(['auth', 'client'])->prefix('client')->name('client.')->group(function () {

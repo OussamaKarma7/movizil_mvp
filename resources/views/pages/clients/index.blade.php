@@ -7,10 +7,18 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h6 class="mb-0 fw-bold">Liste des clients</h6>
-            <form method="GET" action="{{ route('clients.index') }}" class="d-flex gap-2">
-                <input type="text" name="search" class="form-control form-control-sm" placeholder="Nom, email, CIN, ICE..." value="{{ request('search') }}">
-                <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
-            </form>
+            <div class="d-flex gap-2">
+                <form action="{{ route('export.direct.sync') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="fas fa-sync-alt me-1"></i> Synchroniser tout vers Sage
+                    </button>
+                </form>
+                <form method="GET" action="{{ route('clients.index') }}" class="d-flex gap-2">
+                    <input type="text" name="search" class="form-control form-control-sm" placeholder="Nom, email, CIN, ICE..." value="{{ request('search') }}">
+                    <button class="btn btn-sm btn-primary" type="submit">Rechercher</button>
+                </form>
+            </div>
         </div>
         <div class="card-body p-0 table-responsive">
             <table class="table mb-0 align-middle">

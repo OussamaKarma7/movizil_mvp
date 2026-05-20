@@ -201,6 +201,27 @@
                                 <label class="form-label required">Date de fin</label>
                                 <input type="date" class="form-control" name="end_date" id="endDateInput" required>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Référence (REF)</label>
+                                <input type="text" class="form-control" name="ref">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date Création</label>
+                                <input type="date" class="form-control" name="date_creation">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Interlocuteur</label>
+                                <input type="text" class="form-control" name="interlocuteur">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Montant HT (Laissez vide pour calcul auto)</label>
+                                <input type="number" step="0.01" class="form-control" name="montant_ht">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Remarque</label>
+                                <textarea class="form-control" name="remarque" rows="2"></textarea>
+                            </div>
                             
                             <!-- Documents Upload -->
                             

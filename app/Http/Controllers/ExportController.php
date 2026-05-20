@@ -6,11 +6,19 @@ use App\Models\Client;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\AccountingEntry;
+use App\Services\SageService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExportController extends Controller
 {
+    protected $sageService;
+
+    public function __construct(SageService $sageService)
+    {
+        $this->sageService = $sageService;
+    }
+
     public function index()
     {
         return view('pages.export.index');
@@ -98,48 +106,24 @@ class ExportController extends Controller
      */
     public function exportInvoicesTxt()
     {
-        $entries = AccountingEntry::with('invoice.contract.client.company')->orderBy('date', 'asc')->get();
         $fileName = 'IMPORT_SAGE_' . date('Ymd') . '.txt';
+        return response($this->sageService->generateSageContent())
+            ->header('Content-Type', 'text/plain; charset=windows-1252')
+            ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+    }
 
-        $response = new StreamedResponse(function () use ($entries) {
-            if (ob_get_level() > 0) {
-                ob_end_clean();
-            }
+    /**
+     * Direct Sync: Write Sage Export file directly to local disk
+     */
+    public function directSyncSage()
+    {
+        $result = $this->sageService->syncNow();
 
-            $handle = fopen('php://output', 'w');
-            
-            foreach ($entries as $entry) {
-                // Exact 9-column format matching friend's working sample
-                $journal = 'VTE';
-                $dateString = $entry->date ? $entry->date->format('dmy') : date('dmy');
-                
-                $piece = mb_substr(trim($entry->invoice->invoice_number ?? 'FAC'), 0, 13);
-                
-                $acc = str_pad($entry->account_number, 8, '0', STR_PAD_RIGHT);
-                $tier = mb_substr(trim($entry->third_party_account ?? ''), 0, 17);
-                
-                // Clean label, replace semicolons with space to avoid breaking columns
-                $label = mb_substr(str_replace([';', "\t", "\r", "\n", '"', "'"], ' ', trim($entry->label)), 0, 35);
-                
-                // Date d'échéance only for client account lines (Moroccan standard 3421)
-                $dueDate = (str_starts_with($acc, '3421')) 
-                    ? ($entry->invoice->date ? $entry->invoice->date->format('dmy') : date('dmy')) 
-                    : '';
-                
-                $debit = number_format((float)$entry->debit, 2, ',', '');
-                $credit = number_format((float)$entry->credit, 2, ',', '');
-
-                // Final 9-column string: Journal;Date;Piece;CompteG;CompteT;Libelle;Echeance;Debit;Credit
-                $line = "{$journal};{$dateString};{$piece};{$acc};{$tier};{$label};{$dueDate};{$debit};{$credit}\r\n";
-                fwrite($handle, mb_convert_encoding($line, 'Windows-1252', 'UTF-8'));
-            }
-            fclose($handle);
-        });
-
-        $response->headers->set('Content-Type', 'text/plain; charset=windows-1252');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
-
-        return $response;
+        if ($result['success']) {
+            return back()->with('success', "Synchronisation réussie ! Fichier déposé dans : " . $result['path']);
+        } else {
+            return back()->with('error', "Erreur de synchronisation locale : " . $result['error']);
+        }
     }
 
     /**
@@ -186,4 +170,19 @@ class ExportController extends Controller
         return $response;
     }
 
+    /**
+     * API for Automated Sync: Returns Sage content (Token Protected)
+     */
+    public function apiSageSync(Request $request)
+    {
+        $token = $request->query('token');
+        $validToken = config('services.sage.sync_token', env('SAGE_SYNC_TOKEN', 'sage_sync_protected_token_2026'));
+
+        if ($token !== $validToken) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return response($this->sageService->generateSageContent())
+            ->header('Content-Type', 'text/plain; charset=windows-1252');
+    }
 }

@@ -11,19 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contracts', function (Blueprint $table) {
-            $table->index('status');
-            $table->index('end_date');
-        });
-
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->index('status');
-        });
-
-        Schema::table('accounting_entries', function (Blueprint $table) {
-            $table->index('account_number');
-            $table->index('date');
-        });
+        // Indexes already manually applied or previously created
     }
 
     public function down(): void
@@ -37,7 +25,7 @@ return new class extends Migration
             $table->dropIndex(['status']);
         });
 
-        Schema::table('accounting_entries', function (Blueprint $table) {
+        Schema::table('accounting', function (Blueprint $table) {
             $table->dropIndex(['account_number']);
             $table->dropIndex(['date']);
         });

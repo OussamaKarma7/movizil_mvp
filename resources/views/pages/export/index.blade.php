@@ -52,6 +52,36 @@
             </div>
         </div>
 
+        <div class="card shadow-sm border-0 mb-4 bg-light border-start border-success border-4">
+            <div class="card-header bg-white border-bottom p-4">
+                <h5 class="mb-0 fw-bold text-success"><i class="fa-solid fa-bolt-lightning me-2"></i> Exportation AUTOMATIQUE Globale (Sage)</h5>
+                <small class="text-secondary">Envoie TOUTES les données (anciennes et nouvelles) directement vers l'automate Sage.</small>
+            </div>
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-9">
+                        <p class="small text-secondary mb-3">
+                            Ce bouton force l'envoi de l'intégralité du journal de ventes vers <strong>C:\Sage_Import</strong>. 
+                            L'automate Sage détectera le fichier et l'injectera automatiquement, même pour les clients créés il y a longtemps.
+                        </p>
+                        @if(session('success'))
+                            <div class="alert alert-success py-2 small mb-0">
+                                <i class="fa-solid fa-check-circle me-1"></i> {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-3 text-center mt-3 mt-md-0">
+                        <form action="{{ route('export.direct.sync') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-lg d-block w-100 fw-bold shadow-sm">
+                                <i class="fa-solid fa-sync fa-spin me-2"></i> SYNC AUTO
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white border-bottom p-4">
                 <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-lines text-secondary me-2"></i> Données Comptables & Journal</h5>

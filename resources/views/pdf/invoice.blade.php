@@ -5,134 +5,143 @@
     <style>
         @page { margin: 0; }
         body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            font-size: 11px;
+            font-family: 'Times-Roman', serif;
             color: #153b63;
             margin: 0;
-            padding: 40px 50px;
+            padding: 40px 50px 120px 50px;
             line-height: 1.4;
+            box-sizing: border-box;
         }
         .clear { clear: both; }
         
-        /* Header Table */
-        .header-table { width: 100%; border: none; margin-bottom: 40px; }
+        /* Header: Logo left, Company right */
+        .header-table { width: 100%; border: none; border-collapse: collapse; margin-bottom: 40px; }
         .logo-cell { width: 45%; vertical-align: top; }
-        .logo-cell img { height: 115px; width: auto; }
-        .info-cell { width: 55%; text-align: right; vertical-align: top; padding-top: 10px; }
-        .company-name { font-size: 26px; font-weight: bold; font-style: italic; margin-bottom: 2px; }
-        .company-details { font-size: 11px; line-height: 1.2; }
+        .logo-cell img { height: 110px; width: auto; display: block; }
+        .info-cell { width: 55%; text-align: right; vertical-align: top; padding-top: 8px; }
+        .company-name { font-size: 24px; font-weight: bold; font-style: italic; margin-bottom: 4px; color: #153b63; }
+        .company-details { font-size: 11.5px; line-height: 1.5; color: #153b63; }
 
-        /* Meta Table */
-        .meta-table { width: 100%; margin-bottom: 30px; }
-        .date-cell { width: 50%; vertical-align: top; text-align: left; }
-        .dest-cell { width: 50%; vertical-align: top; text-align: right; }
-        .under-italic { text-decoration: underline; font-style: italic; font-size: 13px; font-weight: bold; }
-        .recipient-box { margin-top: 15px; font-weight: bold; text-align: right; }
-        .recipient-name { font-size: 14px; margin-bottom: 2px; }
+        /* Meta: Date left, Destinataire right */
+        .meta-table { width: 100%; border: none; border-collapse: collapse; margin-bottom: 10px; }
+        .date-cell { width: 50%; vertical-align: top; padding-top: 5px; }
+        .dest-cell { width: 50%; text-align: right; vertical-align: top; }
+        .under-italic { text-decoration: underline; font-style: italic; font-size: 13px; color: #153b63; font-weight: bold; }
+        .recipient-label { text-decoration: underline; font-style: italic; font-size: 13px; font-weight: bold; color: #153b63; margin-bottom: 10px; }
+        .recipient-name { font-size: 15px; font-weight: bold; color: #000; margin-top: 10px; }
+        .recipient-details { font-size: 12px; font-weight: bold; color: #000; }
 
-        /* Title */
-        .invoice-title { margin-top: 40px; font-size: 28px; font-weight: bold; font-style: italic; color: #153b63; text-align: left; }
+        /* Invoice Title */
+        .invoice-title { font-size: 30px; font-weight: bold; font-style: italic; color: #1e4067; margin-top: 35px; margin-bottom: 20px; }
 
         /* Main Table */
-        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .invoice-table { width: 100%; border-collapse: collapse; border: 1px solid #f2994a; }
         .invoice-table th { 
             background-color: #f2994a; 
-            color: white; 
-            padding: 10px; 
-            font-weight: bold; 
+            color: #ffffff; 
             text-align: center; 
-            border: 1px solid #f49141;
-            font-size: 12px;
+            padding: 12px 10px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            border: 1px solid #e67e22;
         }
         .invoice-table td { 
-            padding: 25px 10px; 
+            padding: 30px 12px; 
             border: 1px solid #f2994a; 
+            color: #000; 
+            font-size: 13px; 
             vertical-align: middle;
-            color: black;
-            font-weight: 500;
-            font-size: 12px;
         }
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
 
-        /* Totals Table */
-        .totals-wrapper { width: 100%; margin-top: 20px; }
-        .totals-table { float: right; width: 45%; border-collapse: collapse; }
-        .totals-table td { padding: 8px 10px; border: 1px solid #f2994a; font-size: 12px; }
-        .totals-table .label { font-weight: bold; font-style: italic; text-align: right; color: black; }
-        .totals-table .value { text-align: right; width: 40%; color: black; font-weight: bold; }
-        .totals-table .grand-total { border-bottom: 4px double #f2994a !important; }
+        /* Totals */
+        .totals-wrapper { width: 100%; margin-top: 25px; }
+        .totals-table { float: right; width: 45%; border-collapse: collapse; border: 1px solid #f2994a; }
+        .totals-table td { padding: 10px 12px; border: 1px solid #f2994a; font-weight: bold; font-size: 13px; color: #000; }
+        .totals-table .label { font-style: italic; text-align: right; }
+        .totals-table .value { text-align: right; width: 40%; }
 
         /* Amount in Words */
         .amount-words { 
-            margin-top: 70px; 
             text-align: center; 
             font-weight: bold; 
-            text-decoration: underline;
-            font-size: 13px;
-            color: black;
+            text-decoration: underline; 
+            color: #000; 
+            font-size: 13px; 
+            margin-top: 80px; 
             width: 100%;
         }
 
         /* Footer */
-        .footer-line {
+        .page-footer {
             position: fixed;
-            bottom: 40px;
+            bottom: 20px;
             left: 0;
             right: 0;
+            text-align: center;
+            padding: 0 50px;
+        }
+        .footer-line {
             height: 2px;
             background-color: #f2994a;
-            margin: 0 50px;
+            margin-bottom: 10px;
         }
         .footer-content {
-            position: fixed;
-            bottom: 10px;
-            left: 50px;
-            right: 50px;
-            text-align: center;
+            color: #1e4067;
             font-size: 9px;
-            color: #153b63;
-            line-height: 1.3;
+            line-height: 1.5;
+            font-weight: bold;
         }
     </style>
 </head>
 @php
     $clientName = $invoice->contract->client->company->company_name
         ?? ($invoice->contract->client->first_name . ' ' . $invoice->contract->client->last_name);
+    
+    $clientIce = $invoice->contract->client->company->ice ?? null;
+    
     $htAmount = (float) $invoice->amount;
     $vatAmount = round($htAmount * 0.20, 2);
     $ttcAmount = $htAmount + $vatAmount;
     
-    $startDate = optional($invoice->contract->start_date)->format('m/Y');
-    $endDate = optional($invoice->contract->end_date)->format('m/Y');
+    $startDateFormatted = optional($invoice->contract->start_date)->format('d/m/Y');
+    $endDateFormatted = optional($invoice->contract->end_date)->format('d/m/Y');
+    
+    // Formatting service label to match the preview JS exactly
     $serviceLabel = $invoice->contract->type;
-    if ($startDate) $serviceLabel .= ' du ' . $startDate;
-    if ($endDate) $serviceLabel .= ' au ' . $endDate;
-
+    if ($invoice->contract->type === 'Domiciliation' && $startDateFormatted && $endDateFormatted) {
+        $serviceLabel = "Domiciliation Juridique pour la période du $startDateFormatted au $endDateFormatted";
+    }
+    
     $fmt = class_exists('\NumberFormatter') ? new \NumberFormatter('fr_FR', \NumberFormatter::SPELLOUT) : null;
     $amountWords = $fmt ? $fmt->format($ttcAmount) : number_format($ttcAmount, 2, ',', ' ');
+    
+    // Ensure accurate invoice number
+    $displayInvoiceNumber = preg_replace('/[^0-9]/', '', $invoice->invoice_number) ?: $invoice->invoice_number;
+    
+    // Logo processing
+    $logoPath = public_path('uis-logo.png');
+    $logoBase64 = '';
+    if (file_exists($logoPath)) {
+        $logoBase64 = base64_encode(file_get_contents($logoPath));
+    }
 @endphp
 <body>
     <table class="header-table">
         <tr>
             <td class="logo-cell">
-                @php
-                    $logoPath = public_path('uis-logo.png');
-                    $logoData = '';
-                    $hasGd = extension_loaded('gd');
-                    if ($hasGd && file_exists($logoPath)) {
-                        $logoData = base64_encode(file_get_contents($logoPath));
-                    }
-                @endphp
-                @if($hasGd && $logoData)
-                    <img src="data:image/png;base64,{{ $logoData }}" alt="UIS Logo" style="height: 115px; width: auto;">
+                @if($logoBase64)
+                    <img src="data:image/png;base64,{{ $logoBase64 }}" alt="UIS Logo">
                 @else
-                    <div style="font-size: 48px; font-weight: bold; color: #153b63; font-style: italic;">UIS</div>
-                    <div style="font-size: 10px; color: #153b63;">UNIVERSAL INVEST STRATEGY</div>
+                    <div style="padding-top: 10px;">
+                        <span style="font-size: 42px; font-weight: bold; color: #153b63; font-style: italic; letter-spacing: -2px;">U</span>
+                        <span style="font-size: 42px; font-weight: bold; color: #f2994a; font-style: italic; letter-spacing: -2px;">I</span>
+                        <span style="font-size: 42px; font-weight: bold; color: #153b63; font-style: italic; letter-spacing: -2px;">S</span>
+                        <div style="font-size: 11px; color: #153b63; font-weight: bold; margin-top: -10px;">UNIVERSAL INVEST STRATEGY</div>
+                    </div>
                 @endif
             </td>
             <td class="info-cell">
-                <div class="company-name">Universal Invest Strategy.SARL</div>
+                <div class="company-name">Universal Invest Strategy.<span style="font-size:15px;">SARL</span></div>
                 <div class="company-details">
                     RUE EL AARAR ET BD LALLA YACOUT<br>
                     212522273011<br>
@@ -145,14 +154,14 @@
     <table class="meta-table">
         <tr>
             <td class="date-cell">
-                <div class="under-italic">Date de facture: {{ optional($invoice->date)->format('d/m/Y') }}</div>
+                <span class="under-italic">Date de facture: {{ optional($invoice->date)->format('d/m/Y') }}</span>
             </td>
             <td class="dest-cell">
-                <div class="under-italic">DESTINATAIRE:</div>
-                <div class="recipient-box">
-                    <div class="recipient-name">{{ strtoupper($clientName) }}</div>
-                    @if($invoice->contract->client->company?->ice)
-                        <div>ICE: {{ $invoice->contract->client->company->ice }}</div>
+                <div class="recipient-label">DESTINATAIRE:</div>
+                <div class="recipient-name">{{ strtoupper($clientName) }}</div>
+                <div class="recipient-details">
+                    @if($clientIce)
+                        ICE: {{ $clientIce }}
                     @endif
                 </div>
             </td>
@@ -160,7 +169,7 @@
     </table>
 
     <div class="invoice-title">
-        Facture No{{ preg_replace('/[^0-9]/', '', $invoice->invoice_number) ?: $invoice->invoice_number }}
+        Facture &#8470;{{ $displayInvoiceNumber }}
     </div>
 
     <table class="invoice-table">
@@ -174,10 +183,10 @@
         </thead>
         <tbody>
             <tr>
-                <td style="height: 120px;">{{ $serviceLabel }}</td>
-                <td class="text-center">1</td>
-                <td class="text-right">{{ number_format($htAmount, 2, ',', ' ') }}</td>
-                <td class="text-right">{{ number_format($htAmount, 2, ',', ' ') }}</td>
+                <td>{{ $serviceLabel }}</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: right;">{{ number_format($htAmount, 2, ',', ' ') }}</td>
+                <td style="text-align: right;">{{ number_format($htAmount, 2, ',', ' ') }}</td>
             </tr>
         </tbody>
     </table>
@@ -192,7 +201,7 @@
                 <td class="label">TVA 20%</td>
                 <td class="value">{{ number_format($vatAmount, 2, ',', ' ') }}</td>
             </tr>
-            <tr class="grand-total">
+            <tr>
                 <td class="label">Total TTC</td>
                 <td class="value">{{ number_format($ttcAmount, 2, ',', ' ') }}</td>
             </tr>
@@ -201,13 +210,15 @@
     </div>
 
     <div class="amount-words">
-        Arrêter la présente facture à la somme de {{ ucfirst($amountWords) }} DHS ,00 dhs
+        Arrêter la présente facture a la somme de {{ ucfirst($amountWords) }} DHS ,00 dhs
     </div>
 
-    <div class="footer-line"></div>
-    <div class="footer-content">
-        Angle Rue al AARAR et av Lalla Yacout 3eme étage Appartement 8 ICE: 002752348000050<br>
-        Tél: 0707040170-Email: contact@uivstrategy.ma RC: 496151-patente: 34102034-IF: 50137892-CNSS: 2507310
+    <div class="page-footer">
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            Angle Rue al AARAR et av Lalla Yacout 3eme étage Appartement 8 &nbsp; ICE:002752348000050<br>
+            Tél:0707040170-Email: contact@uivstrategy.ma &nbsp; RC: 496151-patente: 34102034-IF: 50137892-CNSS:2507310
+        </div>
     </div>
 </body>
 </html>

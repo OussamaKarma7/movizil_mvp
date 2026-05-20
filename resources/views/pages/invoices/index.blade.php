@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             @forelse($invoices as $invoice)
-                            <tr style="cursor: pointer;" onclick="selectInvoice(this, '{{ addslashes($invoice->invoice_number) }}', '{{ addslashes($invoice->contract->client->company->company_name ?? ($invoice->contract->client->first_name . ' ' . $invoice->contract->client->last_name)) }}', '{{ addslashes($invoice->contract->type) }}', {{ $invoice->amount }}, '{{ $invoice->date }}', '{{ addslashes($invoice->contract->client->address) }}', '{{ addslashes($invoice->contract->client->company->ice ?? '') }}', '{{ route('invoices.pdf', $invoice->id) }}', '{{ optional($invoice->contract->start_date)->format('d/m/Y') }}', '{{ optional($invoice->contract->end_date)->format('d/m/Y') }}', {{ $invoice->id }}, '{{ route('invoices.sendEmail', $invoice->id) }}')">
+                            <tr style="cursor: pointer;" onclick="selectInvoice(this, '{{ addslashes($invoice->invoice_number) }}', '{{ addslashes($invoice->contract->client->company->company_name ?? ($invoice->contract->client->first_name . ' ' . $invoice->contract->client->last_name)) }}', '{{ addslashes($invoice->contract->type) }}', {{ $invoice->amount }}, '{{ optional($invoice->date)->format('d/m/Y') }}', '{{ addslashes($invoice->contract->client->address) }}', '{{ addslashes($invoice->contract->client->company->ice ?? '') }}', '{{ route('invoices.pdf', $invoice->id) }}', '{{ optional($invoice->contract->start_date)->format('d/m/Y') }}', '{{ optional($invoice->contract->end_date)->format('d/m/Y') }}', {{ $invoice->id }}, '{{ route('invoices.sendEmail', $invoice->id) }}')">
                                 <td class="fw-bold text-primary">{{ $invoice->invoice_number }}</td>
                                 <td>
                                     <div class="fw-medium text-dark">{{ $invoice->contract->client->company->company_name ?? ($invoice->contract->client->first_name . ' ' . $invoice->contract->client->last_name) }}</div>
@@ -93,8 +93,7 @@
                         <form id="send-email-form" action="#" method="POST" style="display:inline;">
                             @csrf
                             <button type="submit" id="send-email-btn" class="btn btn-sm btn-success px-3 rounded-pill disabled" 
-                                onclick="return confirm('Envoyer la facture par email au client ?')"
-                                {{ 'disabled' }}>
+                                onclick="return confirm('Envoyer la facture par email au client ?')">
                                 <i class="fa-solid fa-envelope me-2"></i> Envoyer par Email
                             </button>
                         </form>
@@ -140,7 +139,7 @@
                         <table style="width:100%; border:none; border-collapse:collapse; margin-bottom:10px;">
                             <tr>
                                 <td style="width:50%; vertical-align:top; padding-top:5px;">
-                                    <span style="text-decoration:underline; font-style:italic; font-size:13px; color:#153b63;">Date de facture: <span id="preview-date-top">-</span></span>
+                                    <span style="text-decoration:underline; font-style:italic; font-size:13px; color:#153b63; font-weight: bold;">Date de facture: <span id="preview-date-top">-</span></span>
                                 </td>
                                 <td style="width:50%; text-align:right; vertical-align:top;">
                                     <div style="text-decoration:underline; font-style:italic; font-size:13px; font-weight:bold; color:#153b63; text-align:right;">DESTINATAIRE:</div>
@@ -151,18 +150,18 @@
                         </table>
 
                         <!-- INVOICE TITLE -->
-                        <div style="font-size:30px; font-weight:bold; font-style:italic; color:#153b63; margin-top:35px; margin-bottom:15px;">
-                            Facture N°<span id="preview-inv-number">-</span>
+                        <div style="font-size:30px; font-weight:bold; font-style:italic; color:#1e4067; margin-top:35px; margin-bottom:20px;">
+                            Facture &#8470;<span id="preview-inv-number">-</span>
                         </div>
 
                         <!-- MAIN TABLE -->
                         <table style="width:100%; border-collapse:collapse; border:1px solid #f2994a;">
                             <thead>
                                 <tr style="background-color:#f2994a;">
-                                    <th style="color:white; text-align:center; padding:10px 8px; font-size:13px; font-weight:bold; border:1px solid #f2994a; width:50%;">DÉSIGNATION</th>
-                                    <th style="color:white; text-align:center; padding:10px 8px; font-size:13px; font-weight:bold; border:1px solid #f2994a; width:15%;">QUANTITÉ</th>
-                                    <th style="color:white; text-align:center; padding:10px 8px; font-size:13px; font-weight:bold; border:1px solid #f2994a; width:15%;">PRIX</th>
-                                    <th style="color:white; text-align:center; padding:10px 8px; font-size:13px; font-weight:bold; border:1px solid #f2994a; width:20%;">TOTAL</th>
+                                    <th style="color:white; text-align:center; padding:12px 10px; font-size:13px; font-weight:bold; border:1px solid #e67e22; width:50%;">DÉSIGNATION</th>
+                                    <th style="color:white; text-align:center; padding:12px 10px; font-size:13px; font-weight:bold; border:1px solid #e67e22; width:15%;">QUANTITÉ</th>
+                                    <th style="color:white; text-align:center; padding:12px 10px; font-size:13px; font-weight:bold; border:1px solid #e67e22; width:15%;">PRIX</th>
+                                    <th style="color:white; text-align:center; padding:12px 10px; font-size:13px; font-weight:bold; border:1px solid #e67e22; width:20%;">TOTAL</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,31 +175,31 @@
                         </table>
 
                         <!-- TOTALS -->
-                        <table style="width:45%; border-collapse:collapse; border:1px solid #f2994a; margin-left:auto; margin-top:15px;">
+                        <table style="width:45%; border-collapse:collapse; border:1px solid #f2994a; margin-left:auto; margin-top:25px;">
                             <tr>
-                                <td style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">TOTAL HT</td>
-                                <td id="preview-subtotal" style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px; width:40%;">0,00</td>
+                                <td style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">TOTAL HT</td>
+                                <td id="preview-subtotal" style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px; width:40%;">0,00</td>
                             </tr>
                             <tr>
-                                <td style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">TVA 20%</td>
-                                <td id="preview-vat" style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px;">0,00</td>
+                                <td style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">TVA 20%</td>
+                                <td id="preview-vat" style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px;">0,00</td>
                             </tr>
                             <tr>
-                                <td style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">Total TTC</td>
-                                <td id="preview-total" style="padding:8px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px;">0,00</td>
+                                <td style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; font-style:italic; text-align:right; color:#000; font-size:13px;">Total TTC</td>
+                                <td id="preview-total" style="padding:10px 12px; border:1px solid #f2994a; font-weight:bold; text-align:right; color:#000; font-size:13px;">0,00</td>
                             </tr>
                         </table>
 
                         <!-- AMOUNT IN WORDS -->
-                        <div style="text-align:center; font-weight:bold; text-decoration:underline; color:#000; font-size:13px; margin-top:50px;">
-                            Arrêter la présente facture à la somme de <span id="preview-total-words">-</span> DHS ,00 dhs
+                        <div id="preview-words-wrapper" style="text-align:center; font-weight:bold; text-decoration:underline; color:#000; font-size:13px; margin-top:80px;">
+                            Arrêter la présente facture a la somme de <span id="preview-total-words">-</span> DHS .00 dhs
                         </div>
 
                         <!-- FOOTER LINE -->
-                        <div style="position:absolute; bottom:55px; left:50px; right:50px; height:2px; background-color:#f2994a;"></div>
+                        <div style="position:absolute; bottom:65px; left:50px; right:50px; height:2px; background-color:#f2994a;"></div>
 
                         <!-- FOOTER TEXT -->
-                        <div style="position:absolute; bottom:15px; left:0; right:0; text-align:center; color:#153b63; font-size:9.5px; line-height:1.5; padding:0 50px;">
+                        <div style="position:absolute; bottom:20px; left:0; right:0; text-align:center; color:#1e4067; font-size:9px; line-height:1.5; padding:0 50px; font-weight: bold;">
                             Angle Rue al AARAR et av Lalla Yacout 3eme étage Appartement 8 &nbsp; ICE:002752348000050<br>
                             Tél:0707040170-Email: contact@uivstrategy.ma &nbsp; RC: 496151-patente: 34102034-IF: 50137892-CNSS:2507310
                         </div>
@@ -222,7 +221,7 @@
         
         document.getElementById('preview-inv-number').innerText = invNum.replace(/[^0-9]/g, '') || invNum;
         document.getElementById('preview-client-name').innerText = clientName;
-        document.getElementById('preview-service').innerText = (serviceDesc || '') + (startDate ? ' du ' + startDate : '') + (endDate ? ' au ' + endDate : '');
+        document.getElementById('preview-service').innerText = (serviceDesc === 'Domiciliation' ? 'Domiciliation Juridique' : (serviceDesc || '')) + (startDate && endDate ? ' pour la période du ' + startDate + ' au ' + endDate : '');
         document.getElementById('preview-date-top').innerText = date;
         document.getElementById('preview-client-details').innerHTML = (ice ? 'ICE: ' + ice + '<br>' : '');
         
@@ -237,8 +236,8 @@
         document.getElementById('preview-vat').innerText = formattedVat;
         document.getElementById('preview-total').innerText = formattedTotal;
         
-        // Simple mock for amount in words in JS for preview
-        document.getElementById('preview-total-words').innerText = formattedTotal;
+        // Mocking words for preview
+        document.getElementById('preview-total-words').innerText = "..."; 
         
         // Wire download button
         const downloadBtn = document.getElementById('download-btn');
@@ -255,6 +254,9 @@
         // Highlight selected row
         document.querySelectorAll('tbody tr').forEach(el => el.classList.remove('bg-light'));
         rowEl.classList.add('bg-light');
+        
+        // Scroll to preview
+        document.getElementById('invoice-preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 </script>
 @endpush

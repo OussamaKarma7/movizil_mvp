@@ -138,7 +138,19 @@
         </div>
         @endif
 
-        <div class="card border-0 shadow-sm mb-4">
+            <!-- Sage Sync Global Card -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <form action="{{ route('export.direct.sync') }}" method="POST">
+                @csrf
+                <button type="submit" class="card h-100 border-0 shadow-sm w-100 text-center p-0 overflow-hidden bg-success bg-opacity-10" style="border-top: 4px solid #10b981 !important;">
+                    <div class="card-body p-3">
+                        <div class="text-success fw-bold text-uppercase mb-1" style="font-size: 0.65rem;">Synchronisation Sage</div>
+                        <div class="h6 mb-0 fw-bold text-success"><i class="fa-solid fa-sync me-1"></i> TOUT EXPORTER</div>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h6 class="m-0 fw-bold text-dark">Demandes de contrat en attente</h6>
             <a href="{{ route('contracts.pending') }}" class="btn btn-sm btn-outline-primary">Voir toutes les demandes</a>

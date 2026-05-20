@@ -128,11 +128,16 @@ class ContractController extends Controller
         // 3. Store Contract
         $contract = Contract::create([
             'client_id' => $client->id,
+            'ref' => $validated['ref'],
+            'date_creation' => $validated['date_creation'],
             'type' => $validated['contract_type'],
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
             'duration' => $duration,
             'price' => $price,
+            'interlocuteur' => $validated['interlocuteur'],
+            'remarque' => $validated['remarque'],
+            'montant_ht' => $validated['montant_ht'],
             'cin_path' => $cinPath,
             'certificat_path' => $certPath,
         ]);
@@ -259,11 +264,16 @@ class ContractController extends Controller
         $contract = Contract::findOrFail($id);
         
         $validated = $request->validate([
+            'ref' => 'nullable|string|max:50',
+            'date_creation' => 'nullable|date',
             'type' => 'required|string|max:100',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'price' => 'required|numeric|min:0',
-            'status' => 'required|in:pending,active'
+            'status' => 'required|in:pending,active',
+            'interlocuteur' => 'nullable|string|max:255',
+            'remarque' => 'nullable|string',
+            'montant_ht' => 'nullable|numeric|min:0',
         ]);
 
         $contract->update($validated);

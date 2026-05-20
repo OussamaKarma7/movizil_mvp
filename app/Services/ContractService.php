@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 class ContractService
 {
     protected $accountingService;
+    protected $sageService;
 
-    public function __construct(AccountingService $accountingService)
+    public function __construct(AccountingService $accountingService, SageService $sageService)
     {
         $this->accountingService = $accountingService;
+        $this->sageService = $sageService;
     }
 
     /**
@@ -65,6 +67,9 @@ class ContractService
             ]);
 
             $this->accountingService->generateInvoiceEntries($invoice, 'DOM');
+
+            // Automatic Sync to Local Sage Folder
+            $this->sageService->syncNow();
 
             return $invoice;
         });
