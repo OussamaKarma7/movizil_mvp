@@ -60,6 +60,7 @@ Route::middleware(['auth', 'admin', 'throttle:60,1'])->group(function () {
         Route::get('/', [AdminClientController::class, 'index'])->name('index');
         Route::get('/{id}', [AdminClientController::class, 'show'])->name('show');
         Route::put('/{id}', [AdminClientController::class, 'update'])->name('update');
+        Route::delete('/{id}', [AdminClientController::class, 'destroy'])->name('destroy');
         Route::get('/{id}/attachments/{type}', [AdminAttachmentController::class, 'clientRegistrationAttachment'])
             ->whereIn('type', ['cin', 'company_doc'])
             ->name('attachment');

@@ -1,0 +1,58 @@
+=======================================================
+     GUIDE D'INSTALLATION - UNIVERSAL INVEST STRATEGY
+=======================================================
+
+Bonjour M. Bachra,
+
+Ce logiciel (SaaS Accounting) a ete concu pour se synchroniser automatiquement
+avec votre logiciel Sage 100 en local. 
+
+Pour utiliser cette plateforme sur votre ordinateur au quotidien, veuillez
+suivre ces etapes d'installation simples (a faire une seule fois) :
+
+
+-------------------------------------------------------
+ETAPE 1 : INSTALLER LE MOTEUR DU SERVEUR (LARAGON)
+-------------------------------------------------------
+Le logiciel a besoin de PHP et d'une base de donnees pour fonctionner.
+1. Telechargez le logiciel gratuit "Laragon Full" sur internet (https://laragon.org/download/).
+2. Installez-le en gardant les options par defaut.
+3. Lancez Laragon et cliquez sur le gros bouton "Start All" (ou "Tout demarrer").
+   -> C'est tout ! L'ordinateur est desormais pret.
+
+
+-------------------------------------------------------
+ETAPE 2 : PLACER LE PROJET SUR VOTRE BUREAU
+-------------------------------------------------------
+1. Prenez le dossier complet "saas-accounting" (que vous avez recu sur cle USB ou archive).
+2. Placez-le a un endroit fixe sur votre ordinateur (ex: sur votre Bureau ou dans Documents).
+3. Ne deplacez plus ce dossier une fois place.
+
+
+-------------------------------------------------------
+ETAPE 3 : CREER VOTRE RACCOURCI QUOTIDIEN
+-------------------------------------------------------
+1. Ouvrez le dossier "saas-accounting".
+2. Vous y trouverez un fichier nomme "start_saas_app.bat".
+3. Faites un clic-droit sur "start_saas_app.bat" -> Envoyer vers -> Bureau (creer un raccourci).
+
+
+=======================================================
+      VOTRE ROUTINE QUOTIDIENNE (TRES IMPORTANT)
+=======================================================
+A partir de maintenant, chaque matin, vous n'aurez qu'une seule chose a faire :
+
+-> DOUBLE-CLIQUEZ sur le raccourci "start_saas_app" sur votre bureau.
+
+Le script fera le reste pour vous :
+- Il demarre le serveur interne de la plateforme.
+- Il ouvre automatiquement Google Chrome / Edge sur la page du SaaS.
+- Il ouvre votre logiciel Sage 100 et charge votre fichier comptable (UIS2026.mae).
+
+Une petite fenetre noire va s'ouvrir. NE LA FERMEZ PAS tant que vous travaillez !
+Si vous la fermez, le logiciel web s'arretera de fonctionner.
+Pour quitter a la fin de la journee, fermez simplement la fenetre noire.
+
+=======================================================
+En cas de besoin, le dossier d'export de Sage est configure sur :
+C:\Sage_Import\

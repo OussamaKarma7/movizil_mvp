@@ -1,0 +1,36 @@
+C'est un problème très classique sous Windows ! La fenêtre "Changer d'icône" est extrêmement exigeante : si l'outil en ligne a généré un fichier .ico moderne (qui est en réalité juste un fichier PNG avec une extension modifiée), Windows le refuse immédiatement en disant qu'il ne contient aucune icône.
+
+Voici comment générer un VRAI fichier .ico multi-tailles 100 % compatible avec Windows, ou vérifier ce qui a bloqué :
+Solution 1 : Utiliser ICOConvert (Convertisseur spécial Windows)
+
+Certains sites génèrent des formats trop simplifiés. ICOConvert crée la structure exacte attendue par les raccourcis Windows.
+
+    Rendez-vous sur icoconvert.com.
+
+    Step 1 : Cliquez sur Choose File, sélectionnez votre movizil_logo.png et cliquez sur Upload.
+
+    Step 2 à 4 : Laissez tout par défaut.
+
+    Step 5 : Assurez-vous que l'option "ICO for Windows 7, 8, 10 and Vista" est bien sélectionnée.
+
+    Cliquez sur Convert ICO, puis sur Download your icon(s).
+
+Solution 2 : Vérifier l'extension réelle du fichier téléchargé
+
+Il arrive souvent que le navigateur télécharge le fichier sous le nom movizil_logo.ico.png ou movizil_logo.png sans qu'on le remarque.
+
+    Assurez-vous que le type de fichier affiché dans l'explorateur Windows est bien "Icône" (et non "Image PNG" ou "Document").
+
+?? Appliquer l'icône sur votre raccourci
+
+Une fois le nouveau fichier téléchargé avec ICOConvert :
+
+    Faites un clic droit sur votre raccourci (sur le Bureau) > Propriétés.
+
+    Cliquez sur Changer d'icône... > Parcourir...
+
+    Sélectionnez le fichier fraîchement téléchargé depuis ICOConvert.
+
+    Windows doit cette fois l'accepter instantanément et afficher votre logo dans l'aperçu !
+
+    Cliquez sur OK puis Appliquer.

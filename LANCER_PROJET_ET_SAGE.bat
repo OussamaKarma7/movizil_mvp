@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 TITLE UNIVERSAL INVEST STRATEGY - DEMARRAGE AUTOMATIQUE
 COLOR 0A
 
@@ -7,13 +8,13 @@ echo    DEMARRAGE DE LA PLATEFORME ET DE L'AUTOMATE SAGE 100
 echo ==============================================================================
 echo.
 
-:: 1. VÃ©rification des dossiers
+:: 1. Vérification des dossiers
 if not exist "C:\Sage_Import" (
     echo [INFO] Creation du dossier C:\Sage_Import...
     mkdir "C:\Sage_Import"
 )
 
-:: 2. Lancement du serveur Web (MÃ©thode directe pour Ã©viter les erreurs de permission)
+:: 2. Lancement du serveur Web (Méthode directe pour éviter les erreurs de permission)
 echo [1/3] Lancement du serveur Web sur http://127.0.0.1:8000...
 start /b php -S 127.0.0.1:8000 -t public > nul 2>&1
 

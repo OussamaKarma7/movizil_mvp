@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 TITLE UNIVERSAL INVEST STRATEGY - PARTAGE CLIENT
 COLOR 0B
 
@@ -20,7 +21,7 @@ echo [2/2] Generation du lien public securise pour le client...
 echo Patientez quelques secondes pour voir apparaitre votre lien en ".lhr.life"
 echo.
 
-:: 2. CrÃ©ation du tunnel sÃ©curisÃ© avec localhost.run
+:: 2. Création du tunnel sécurisé avec localhost.run
 ssh -o StrictHostKeyChecking=no -R 80:localhost:8000 nokey@localhost.run -T -n
 
 pause

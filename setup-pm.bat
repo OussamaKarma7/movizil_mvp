@@ -1,11 +1,12 @@
 @echo off
+cd /d "%~dp0"
 SETLOCAL EnableDelayedExpansion
 
 echo ======================================================
 echo   PROJET SAAS ACCOUNTING - CONFIGURATION LOCALE
 echo ======================================================
 
-:: 1. VÃ©rifier si PHP est installÃ©
+:: 1. Vérifier si PHP est installé
 php -v >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERREUR] PHP n'est pas installe ou n'est pas dans le PATH.
@@ -13,7 +14,7 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-:: 2. VÃ©rifier si Composer est installÃ©
+:: 2. Vérifier si Composer est installé
 composer --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERREUR] Composer n'est pas installe.
@@ -27,7 +28,7 @@ if not exist .env (
     copy .env.example .env
 )
 
-:: 4. Installation des dÃ©pendances PHP
+:: 4. Installation des dépendances PHP
 echo [+] Installation des dependances PHP...
 call composer install
 
@@ -35,10 +36,13 @@ call composer install
 echo [+] Generation de la cle d'application...
 php artisan key:generate
 
+echo [+] Creation de la base de donnees si manquante...
+php database/create_db.php
+
 echo [+] Migration de la base de donnees...
 php artisan migrate --seed
 
-:: 6. Installation des dÃ©pendances Javascript (si npm est prÃ©sent)
+:: 6. Installation des dépendances Javascript (si npm est présent)
 npm -v >nul 2>&1
 if %errorlevel% equ 0 (
     echo [+] Installation des dependances Javascript...
